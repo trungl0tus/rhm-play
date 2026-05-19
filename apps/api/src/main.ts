@@ -9,7 +9,16 @@ async function bootstrap() {
   });
 
   app.setGlobalPrefix('api');
-  app.enableCors({ origin: true, credentials: true });
+
+  // Production: lock CORS to a comma-separated allowlist in ALLOWED_ORIGINS.
+  // Dev / unset: fall back to `true` which echoes the request origin.
+  const allowed = process.env.ALLOWED_ORIGINS?.split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+  app.enableCors({
+    origin: allowed && allowed.length > 0 ? allowed : true,
+    credentials: true,
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -20,8 +29,10 @@ async function bootstrap() {
   app.useGlobalFilters(new PrismaExceptionFilter());
 
   const port = Number(process.env.PORT ?? 4000);
-  await app.listen(port);
-  Logger.log(`RHM Play API running on http://localhost:${port}/api`, 'Bootstrap');
+  // Bind to 0.0.0.0 so platform routers (Railway, Render) can reach us;
+  // localhost-only would 502 in production.
+  await app.listen(port, '0.0.0.0');
+  Logger.log(`RHM Play API running on port ${port} (prefix: /api)`, 'Bootstrap');
 }
 
 bootstrap();
