@@ -27,6 +27,12 @@ export type SeriesEntry = {
   studentCount: number;
   featured?: boolean;
   newRelease?: boolean;
+  /** Cinematic teaser played silently behind hero & featured cards. */
+  previewVideoUrl?: string;
+  /** Short Vietnamese tagline rendered on cinematic hero/card overlays. */
+  tagline?: string;
+  /** Story chapters used to group the episode list cinematic-style. */
+  chapters?: Array<{ title: string; range: [number, number]; subtitle?: string }>;
 };
 
 function ep(
@@ -82,6 +88,13 @@ export const SERIES: SeriesEntry[] = [
     rating: 4.9,
     studentCount: 12480,
     featured: true,
+    previewVideoUrl: "/videos/implant-1.mp4",
+    tagline: "Hành trình từ trụ Titanium đến nụ cười trọn vẹn",
+    chapters: [
+      { title: "Hành trình bắt đầu", range: [1, 3], subtitle: "Nền tảng giải phẫu & hệ thống" },
+      { title: "Lâm sàng cốt lõi", range: [4, 7], subtitle: "Lập kế hoạch · dụng cụ · vạt" },
+      { title: "Cao cấp", range: [8, 12], subtitle: "Sequence khoan · ghép xương · all-on-4" },
+    ],
     episodes: [
       ep(1, "Tổng quan Implant Nha khoa", 252, true, true, [
         { label: "Slide bài giảng", size: "2.4 MB", type: "pdf" },
@@ -127,6 +140,12 @@ export const SERIES: SeriesEntry[] = [
     studentCount: 8720,
     featured: true,
     newRelease: true,
+    previewVideoUrl: "/videos/veneer-1.mp4",
+    tagline: "Thiết kế nụ cười từng lớp · từng nhịp ánh sáng",
+    chapters: [
+      { title: "Nguyên tắc thiết kế", range: [1, 4], subtitle: "Tỉ lệ vàng · mockup · wax-up" },
+      { title: "Kỹ thuật lâm sàng", range: [5, 8], subtitle: "Mài tối thiểu · gắn · layering" },
+    ],
     episodes: [
       ep(1, "Smile design — Nguyên tắc thẩm mỹ", 330, true, true, [
         { label: "Smile design ebook", size: "6.4 MB", type: "pdf" },
@@ -161,6 +180,8 @@ export const SERIES: SeriesEntry[] = [
     studentCount: 6240,
     featured: true,
     newRelease: true,
+    previewVideoUrl: "/videos/invisalign-1.mp4",
+    tagline: "Niềng vô hình · không ai biết bạn đang đổi đời",
     episodes: [
       ep(1, "Giới thiệu Invisalign SmartTrack", 240, true, false, [
         { label: "Brochure tổng quan", size: "4.2 MB", type: "pdf" },
@@ -193,6 +214,7 @@ export const SERIES: SeriesEntry[] = [
     progress: 0,
     rating: 4.6,
     studentCount: 3940,
+    tagline: "Cứu sống tủy bằng những đường file Ni-Ti chính xác",
     episodes: [
       ep(1, "Giải phẫu hệ thống ống tuỷ", 285, true, false),
       ep(2, "File Ni-Ti — Tổng quan", 312, true, false),
@@ -219,6 +241,8 @@ export const SERIES: SeriesEntry[] = [
     progress: 0,
     rating: 4.8,
     studentCount: 5120,
+    previewVideoUrl: "/videos/implant-2.mp4",
+    tagline: "Phân loại · rạch · chia răng — chuẩn từng đường dao",
     episodes: [
       ep(1, "Phân loại Pell-Gregory", 290, true, false),
       ep(2, "Đường rạch và bóc tách vạt", 410, true, false),

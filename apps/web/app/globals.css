@@ -33,6 +33,18 @@
     var(--font-sans-rhm), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
     "Segoe UI Emoji", sans-serif;
+  --font-display:
+    var(--font-display-rhm), "Playfair Display", "Iowan Old Style", Georgia,
+    "Times New Roman", serif;
+}
+
+/* ─── Display (serif) typography utility ───────────────────────────────────
+   Used for hero headlines & section "magazine" titles — gives the app the
+   Masterclass-style cinematic feel without overpowering Vietnamese text. */
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01", "kern", "liga";
+  letter-spacing: -0.02em;
 }
 
 html,
@@ -259,4 +271,252 @@ button {
 }
 .row-snap > * {
   scroll-snap-align: start;
+}
+
+/* ─── Ambient mesh backdrop (sits behind the entire app shell) ──────────── */
+.ambient-mesh {
+  background:
+    radial-gradient(
+      ellipse 60% 40% at 15% 0%,
+      rgba(31, 182, 168, 0.18) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 95% 20%,
+      rgba(192, 132, 252, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 50% 100%,
+      rgba(245, 185, 69, 0.08) 0%,
+      transparent 65%
+    ),
+    linear-gradient(180deg, #050b14 0%, #060e18 50%, #050b14 100%);
+}
+
+/* ─── Premium card lift / hover ─────────────────────────────────────────── */
+.lift-fx {
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .lift-fx:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+@media (hover: none) {
+  .lift-fx:active {
+    transform: scale(0.985);
+  }
+}
+
+/* ─── Marquee scrolling — used on the "Phát sóng trực tiếp" rail ────────── */
+.marquee {
+  display: flex;
+  gap: 2rem;
+  animation: marqueeScroll 22s linear infinite;
+  will-change: transform;
+}
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}
+
+/* ─── Section title rule — refined accent on premium home headings ──────── */
+.title-rule {
+  background: linear-gradient(
+    90deg,
+    var(--brand) 0%,
+    rgba(31, 182, 168, 0.4) 30%,
+    transparent 100%
+  );
+  height: 2px;
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(31, 182, 168, 0.6);
+}
+
+/* ─── Hero cinematic overlay — used over autoplay video heroes ──────────── */
+.hero-scrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 11, 20, 0.1) 0%,
+      rgba(5, 11, 20, 0.05) 35%,
+      rgba(5, 11, 20, 0.65) 70%,
+      rgba(5, 11, 20, 0.98) 100%
+    );
+}
+.hero-side-scrim {
+  background: linear-gradient(
+    90deg,
+    rgba(5, 11, 20, 0.7) 0%,
+    transparent 35%,
+    transparent 65%,
+    rgba(5, 11, 20, 0.4) 100%
+  );
+}
+
+/* ─── Gold gradient text — used for the "Premium" wordmark ──────────────── */
+.gold-text {
+  background: linear-gradient(135deg, #fde68a 0%, #f5b945 45%, #d97706 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 0 24px rgba(245, 185, 69, 0.25);
+}
+
+/* ─── Teal gradient text — used for "Series" wordmark ───────────────────── */
+.teal-text {
+  background: linear-gradient(135deg, #5eead4 0%, #1fb6a8 50%, #14a094 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─── Animated chip glow — used on active category pills ────────────────── */
+@keyframes chipGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 16px rgba(31, 182, 168, 0.45),
+      inset 0 0 0 1px rgba(31, 182, 168, 0.8);
+  }
+  50% {
+    box-shadow:
+      0 0 26px rgba(31, 182, 168, 0.7),
+      inset 0 0 0 1px rgba(31, 182, 168, 1);
+  }
+}
+.chip-glow {
+  animation: chipGlow 3.2s ease-in-out infinite;
+}
+
+/* ─── Floating "Live" pulse dot ─────────────────────────────────────────── */
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.4);
+  }
+}
+.live-dot {
+  animation: livePulse 1.4s ease-in-out infinite;
+}
+
+/* ─── Premium ring rotation — surrounds the raised reel CTA ─────────────── */
+@keyframes ringSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ring-sweep {
+  animation: ringSweep 8s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring-sweep {
+    animation: none;
+  }
+}
+
+/* ─── Slide-up section animation — used by the premium home sections ────── */
+@keyframes sectionRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.section-rise {
+  animation: sectionRise 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-rise {
+    animation: none;
+  }
+}
+
+/* ─── Pure scroll-fade edges — gives horizontal rows a cinematic feel ───── */
+.fade-edges {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    black 16px,
+    black calc(100% - 24px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    black 16px,
+    black calc(100% - 24px),
+    transparent 100%
+  );
+}
+
+/* ─── Story-driven chapter divider ──────────────────────────────────────── */
+.chapter-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+}
+.chapter-divider::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 16px rgba(31, 182, 168, 0.7);
+}
+
+/* ─── Refined page transition — slightly more cinematic timing ──────────── */
+.route-cinematic {
+  animation: routeCinematic 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes routeCinematic {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-cinematic {
+    animation: none;
+  }
 }

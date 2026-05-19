@@ -1,9 +1,5 @@
-import FeedReel from "./components/FeedReel";
+import PremiumHome from "./components/PremiumHome";
 
 export default function Page() {
-  return (
-    <div className="h-full w-full">
-      <FeedReel />
-    </div>
-  );
+  return <PremiumHome />;
 }
